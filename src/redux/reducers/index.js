@@ -4,6 +4,7 @@ import loginMode from './loginModeReducer';
 import user from './userReducer';
 import leagues from './leaguesReducer.js';
 import teams from './teamsReducer.js';
+import detail from './detailReducer.js';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   leagues, // display available leagues for a user to select
   teams, // display of avaliable teams
+  detail, // details of a selected team
 });
 
 export default rootReducer;

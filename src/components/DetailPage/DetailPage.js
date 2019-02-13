@@ -1,14 +1,33 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, List, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 class DetailPage extends Component {
     static navigationOptions = { title: 'Details' };
 
     render() {
+
         return (
             <View style={styles.container}>
-                <Text>Detail Page!</Text>
+                <Text style={styles.heading}>Detail Page!</Text>
+                    <View style={styles.card}>
+                        <Text>{this.props.reduxStore.detail.name}</Text>
+                        <Text>{this.props.reduxStore.detail.record}</Text>
+                    </View>
+                    <FlatList
+                        data={[
+                            {key: 'One'},
+                            {key: 'Two'},
+                            {key: 'Three'},
+                            {key: 'Four'},
+                            {key: 'Five'},
+                        ]}
+                        renderItem={({ item }) => (
+                            <Text>
+                                {item.key}
+                            </Text>
+                        )} 
+                    />
             </View>
         )
     }
@@ -22,18 +41,22 @@ export default connect(mapStoreToProps)(DetailPage);
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        borderWidth: 1,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#F5FCFF',
-        margin: 10
     },
     card: {
         borderWidth: 3,
         borderRadius: 3,
         borderColor: '#000',
+        justifyContent: 'center',
         width: 100,
         height: 100,
         margin: 5
+    },
+    heading: {
+        textAlign: 'center',
+        fontSize: 20
     },
 });
