@@ -8,7 +8,7 @@ class DetailPage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                Detail Page!
+                <Text>Detail Page!</Text>
             </View>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 
 class MainPageItem extends Component {
     render() {
@@ -10,14 +10,14 @@ class MainPageItem extends Component {
                 <Text>{this.props.teams.last}</Text>
                 <Button
                     title="Details" 
-                    onPress={() => {( this.props.navigation.navigate('Details') )}}
+                    onPress={() => {( this.props.navigation.navigate('Detail') )}}
                 />
             </View>
         )
     }
 }
 
-export default MainPageItem
+export default withNavigation(MainPageItem);
 
 const styles = StyleSheet.create({
     card: {
