@@ -10,7 +10,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
-import AppNavigator from './src/navigation/AppNavigation.js';
+import AppContainer from './src/navigation/AppContainer.js';
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -53,9 +53,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          <AppNavigator />
-        </View>
+          <AppContainer />
       </Provider>
     );
   }

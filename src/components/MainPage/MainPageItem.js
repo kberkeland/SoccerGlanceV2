@@ -5,9 +5,9 @@ import { createStackNavigator } from 'react-navigation';
 class MainPageItem extends Component {
     render() {
         return (
-            <View key={i} style={styles.card}>
-                <Text>{teams.name}</Text>
-                <Text>{teams.last}</Text>
+            <View style={styles.card}>
+                <Text>{this.props.teams.name}</Text>
+                <Text>{this.props.teams.last}</Text>
                 <Button
                     title="Details" 
                     onPress={() => {( this.props.navigation.navigate('Details') )}}

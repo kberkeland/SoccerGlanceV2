@@ -12,6 +12,7 @@ class MainPage extends Component {
                 {this.props.reduxStore.teams.map((teams, i) => (
                     <MainPageItem key={i} teams={teams} />
                 ))}
+                <Text>Hi</Text>
             </View>
         )
     }
