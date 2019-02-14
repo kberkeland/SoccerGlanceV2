@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
+// import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
 
 class MainPageItem extends Component {
+
+    goToDetail = () => {
+        console.log('in goToDetail');
+        const action = {type: 'FETCH_TEAMS'};
+        this.props.dispatch(action);
+        this.props.navigation.navigate('Detail');
+    }
+
     render() {
         return (
             <View style={styles.card}>
@@ -10,14 +19,18 @@ class MainPageItem extends Component {
                 <Text>{this.props.teams.last}</Text>
                 <Button
                     title="Details" 
-                    onPress={() => {( this.props.navigation.navigate('Detail') )}}
+                    onPress={this.goToDetail}
                 />
             </View>
         )
     }
 }
 
-export default withNavigation(MainPageItem);
+const mapStoreToProps = reduxStore => ({
+    reduxStore,
+});
+
+export default connect(mapStoreToProps)(MainPageItem);
 
 const styles = StyleSheet.create({
     card: {

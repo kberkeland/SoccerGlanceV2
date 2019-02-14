@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, List, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 class DetailPage extends Component {
+
+    // componentDidMount() {
+    //     const action = {type: 'FETCH_TEAMS'};
+    //     this.props.dispatch(action);
+    // }
+
     static navigationOptions = { title: 'Details' };
 
     render() {
@@ -14,6 +20,9 @@ class DetailPage extends Component {
                         <Text>{this.props.reduxStore.detail.name}</Text>
                         <Text>{this.props.reduxStore.detail.record}</Text>
                     </View>
+                    {this.props.reduxStore.teams.map((teams, i) => (
+                            <Text key={i}>{teams.id}{teams.name}</Text>
+                    ))}
                     <FlatList
                         data={[
                             {key: 'One'},

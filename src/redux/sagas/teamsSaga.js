@@ -19,9 +19,12 @@ function* addUserTeam(action) {
 
 // worker Saga: will be fired on "FETCH_TEAMS" actions
 function* findTeams() {
+    console.log(`in findTeams saga`);
     try {
         // call to the database for team data
-        const response = yield axios.get('api/teams');
+        const response = yield axios.get('https://262ff013.ngrok.io/api/teams');
+        console.log(`After axios get`);
+        console.log(response);
         const action = {type: 'SET_TEAMS', payload: response.data};
         yield put(action);
     } catch (error) {

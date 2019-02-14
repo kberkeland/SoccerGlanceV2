@@ -10,7 +10,7 @@ class MainPage extends Component {
         return (
             <View style={styles.container}>
                 {this.props.reduxStore.teams.map((teams, i) => (
-                    <MainPageItem key={i} teams={teams} />
+                    <MainPageItem key={i} teams={teams} navigation={this.props.navigation} />
                 ))}
             </View>
         )
