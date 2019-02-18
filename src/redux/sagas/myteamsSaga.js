@@ -9,7 +9,7 @@ function* myteamsSaga() {
 function* findMyteams() {
     try {
         // call to the database for team data
-        const response = yield axios.get('/myteams');
+        const response = yield axios.get('http://c4aad331.ngrok.io/api/myteams');
         const action = {type: 'SET_MY_TEAMS', payload: response.data};
         yield put(action);
     } catch (error) {

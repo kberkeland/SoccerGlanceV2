@@ -9,14 +9,15 @@ const BASE_URL = 'https://api.sportradar.us/soccer-xt3/eu/en/';
 const API_KEY = process.env.API_KEY;
 
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
+    console.log('Bye');
     // select statement for finding user team data
     let queryText = `SELECT "my_teams"."name", "my_teams"."competitor_id", "leagues"."tournament_id"
                      FROM "my_teams"
                      JOIN "leagues" ON "leagues"."id" = "my_teams"."league_id"
                      WHERE "my_teams"."person_id" = $1;`;
 
-    pool.query(queryText, [req.user.id]).then( async (result) => {
+    pool.query(queryText, [1]).then( async (result) => {
         // variable for storing a list of axios requests for every user team
         let axiosArray =[];
 

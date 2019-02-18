@@ -6,7 +6,7 @@ import MainPageItem from './MainPageItem.js';
 class MainPage extends Component {
 
     componentDidMount() {
-        // use component did mount to dispatch an action to request a list of leagues and teams
+        // use component did mount to dispatch an action to request all of my teams
         this.props.dispatch({type: 'FETCH_MY_TEAMS'});
     }
 
