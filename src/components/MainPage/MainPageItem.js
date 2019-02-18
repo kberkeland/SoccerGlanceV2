@@ -16,7 +16,7 @@ class MainPageItem extends Component {
         return (
             <View style={styles.card}>
                 <Text>{this.props.teams.name}</Text>
-                <Text>{this.props.teams.last}</Text>
+                <Text>{this.props.teams.color}</Text>
                 <Button
                     title="Details" 
                     onPress={this.goToDetail}

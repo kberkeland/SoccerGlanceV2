@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import MainPageItem from './MainPageItem.js';
 
 class MainPage extends Component {
+
+    componentDidMount() {
+        // use component did mount to dispatch an action to request a list of leagues and teams
+        this.props.dispatch({type: 'FETCH_MY_TEAMS'});
+    }
+
     static navigationOptions = { title: 'Home' };
 
     render() {
         return (
             <View style={styles.container}>
-                {this.props.reduxStore.teams.map((teams, i) => (
+                {this.props.reduxStore.myteams.map((teams, i) => (
                     <MainPageItem key={i} teams={teams} navigation={this.props.navigation} />
                 ))}
             </View>

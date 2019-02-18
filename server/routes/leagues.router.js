@@ -10,13 +10,13 @@ const API_KEY = process.env.API_KEY;
 
 
 // Tournaments info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments.json?api_key=j9xerbvc24veacrq3hpby6dk
+// https://api.sportradar.us/soccer-xt3/eu/en/tournaments.json?api_key=
 
 // Specific tournament info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/info.json?api_key=j9xerbvc24veacrq3hpby6dk
+// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/info.json?api_key=
 
 // Team info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/teams/sr:competitor:48/statistics.json?api_key=j9xerbvc24veacrq3hpby6dk
+// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/teams/sr:competitor:48/statistics.json?api_key=
 
 // GET route to select a league from available leagues
 router.get('/', rejectUnauthenticated, (req, res) => {

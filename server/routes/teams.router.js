@@ -14,13 +14,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 }); // end POST to user teams
 
 // Tournaments info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments.json?api_key=j9xerbvc24veacrq3hpby6dk
+// https://api.sportradar.us/soccer-xt3/eu/en/tournaments.json?api_key=
 
 // Specific tournament info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/info.json?api_key=j9xerbvc24veacrq3hpby6dk
+// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/info.json?api_key=
 
 // Team info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/teams/sr:competitor:48/statistics.json?api_key=j9xerbvc24veacrq3hpby6dk
+// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/teams/sr:competitor:48/statistics.json?api_key=
 
 // GET route to select team data from Sportradar.us API after login
 router.get('/', (req, res) => {
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
     // pool.query(queryText).then((result) => {
     //     console.log(result.rows);
             // axios request to the sportradar.us API
-            console.log(`In teams GET route`);
+            // console.log(`In teams GET route`);
             axios({
                 method: `GET`,
                 url: `${BASE_URL}tournaments/sr:tournament:17/info.json?api_key=${API_KEY}`

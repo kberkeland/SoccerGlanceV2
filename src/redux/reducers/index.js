@@ -5,6 +5,7 @@ import user from './userReducer';
 import leagues from './leaguesReducer.js';
 import teams from './teamsReducer.js';
 import detail from './detailReducer.js';
+import myteams from './myteamsReducer.js';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   leagues, // display available leagues for a user to select
   teams, // display of avaliable teams
   detail, // details of a selected team
+  myteams, // list of myteams
 });
 
 export default rootReducer;

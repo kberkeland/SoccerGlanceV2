@@ -17,8 +17,8 @@ class DetailPage extends Component {
             <View style={styles.container}>
                 <Text style={styles.heading}>Detail Page!</Text>
                     <View style={styles.card}>
-                        <Text>{this.props.reduxStore.detail.name}</Text>
-                        <Text>{this.props.reduxStore.detail.record}</Text>
+                        <Text style={styles.cardText}>{this.props.reduxStore.detail.name}</Text>
+                        <Text style={styles.cardText}>{this.props.reduxStore.detail.record}</Text>
                     </View>
                     {this.props.reduxStore.teams.map((teams, i) => (
                             <Text key={i}>{teams.id}{teams.name}</Text>
@@ -67,5 +67,8 @@ const styles = StyleSheet.create({
     heading: {
         textAlign: 'center',
         fontSize: 20
+    },
+    cardText: {
+        textAlign: 'center',
     },
 });
