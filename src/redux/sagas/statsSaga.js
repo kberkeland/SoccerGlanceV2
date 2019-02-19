@@ -6,12 +6,14 @@ function* statsSaga() {
 }
 
 // saga that will call to the API and get stats for a specific team
-function* getStats() {
+function* getStats(action) {
+    // let test = action.payload;
     try {
-        // call to the database for team data
-        const response = yield axios.get('http://c4aad331.ngrok.io/api/stats');
-        const action = {type: 'SET_STATS', payload: response.data};
-        yield put(action);
+        // call to the database for a teams stats
+        console.log(`in getStats:${action.payload}`);
+        const response = yield axios.get(`https://ae0475c8.ngrok.io/api/stats/${action.payload}`);
+        const nextAction = {type: 'SET_STATS', payload: response.data};
+        yield put(nextAction);
     } catch (error) {
         // error message when trying to get team list
         console.log(`Axios GET request in "FETCH_STATS" failed: ${error}`);

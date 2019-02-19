@@ -11,14 +11,15 @@ const API_KEY = process.env.API_KEY;
 
 router.get('/', (req, res) => {
     // select statement for finding user team data
-    let queryText = `SELECT "my_teams"."name", "my_teams"."competitor_id", "leagues"."tournament_id"
-                            "stats"."matches_won", "stats"."matches_drawn", "stats"."matches_lost"
+    let queryText = `SELECT "my_teams"."name", "my_teams"."competitor_id", "leagues"."tournament_id",
+                            "stats"."matches_won", "stats"."matches_drawn", "stats"."matches_lost",
+                            "my_teams"."id", "teams"."id" AS "team_id"
                      FROM "my_teams"
                      JOIN "leagues" ON "leagues"."id" = "my_teams"."league_id"
                      JOIN "teams" ON "teams"."competitor_id" = "my_teams"."competitor_id"
                      JOIN "stats" ON "stats"."team_id" = "teams"."id"
                      WHERE "my_teams"."person_id" = $1;`;
-    pool.query(queryText).then((result) => {
+    pool.query(queryText, ['1']).then((result) => {
         res.send(result.rows);
     // pool.query(queryText, [req.user.id]).then( async (result) => {
 
@@ -69,7 +70,7 @@ router.get('/', (req, res) => {
 
     }).catch((poolError) => {
         // console log and client message for error
-        console.log(`Error in pool query for myteams ${req.user.username}: ${poolError}`);
+        console.log(`Error in pool query for myteams: ${poolError}`);
         res.sendStatus(500);
     });
 }); // end of GET route for myteams
@@ -119,5 +120,15 @@ function getTeamStats(urlIn) {
     });
 
 }
+
+router.delete('/', (req, res) => {
+    const queryText = `DELETE FROM "myteams" WHERE "id" = $1;`;
+    pool.query(queryText, [req.query.id]).then(() => {
+        res.sendStatus(200);
+    }).catch((poolError) => {
+        console.log(`Error completing DELETE ${poolError}`);
+        res.sendStatus(500);
+    });
+});
 
 module.exports = router;

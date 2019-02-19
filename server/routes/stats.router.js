@@ -11,11 +11,13 @@ const API_KEY = process.env.API_KEY;
 
 router.get('/:teamid', (req, res) => {
     // select statement for finding user team data
+    console.log(`in stats route: ${req.params.teamid}`);
     let queryText = `SELECT *
                      FROM "stats"
                      WHERE "team_id" = $1;`;
 
     pool.query(queryText,[req.params.teamid]).then((result) => {
+        console.log(result.rows);
         res.send(result.rows);
     // pool.query(queryText, [req.user.id]).then( async (result) => {
 
@@ -66,7 +68,7 @@ router.get('/:teamid', (req, res) => {
 
     }).catch((poolError) => {
         // console log and client message for error
-        console.log(`Error in pool query for myteams ${req.user.username}: ${poolError}`);
+        console.log(`Error in stats pool query: ${poolError}`);
         res.sendStatus(500);
     });
 }); // end of GET route for myteams
