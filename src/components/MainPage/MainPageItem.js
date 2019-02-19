@@ -7,7 +7,7 @@ class MainPageItem extends Component {
 
     goToDetail = () => {
         console.log('in goToDetail');
-        const action = {type: 'FETCH_TEAMS'};
+        const action = {type: 'FETCH_STATS'};
         this.props.dispatch(action);
         this.props.navigation.navigate('Detail');
     }
@@ -16,7 +16,7 @@ class MainPageItem extends Component {
         return (
             <View style={styles.card}>
                 <Text>{this.props.teams.name}</Text>
-                <Text>{this.props.teams.color}</Text>
+                <Text>{this.props.teams.matches_won}-{this.props.teams.matches_drawn}-{this.props.teams.matches_lost}</Text>
                 <Button
                     title="Details" 
                     onPress={this.goToDetail}

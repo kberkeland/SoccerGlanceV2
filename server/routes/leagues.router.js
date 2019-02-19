@@ -19,33 +19,34 @@ const API_KEY = process.env.API_KEY;
 // https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/teams/sr:competitor:48/statistics.json?api_key=
 
 // GET route to select a league from available leagues
-router.get('/', rejectUnauthenticated, (req, res) => {
-    // let queryText = `SELECT * FROM "teams" WHERE `;
-    // pool.query(queryText).then((result) => {
+router.get('/', (req, res) => {
+    let queryText = `SELECT * FROM "leagues";`;
+    pool.query(queryText).then((result) => {
+        res.send(result.rows);
     //     console.log(result.rows);
             // axios request to the sportradar.us API
-            axios({
-                method: `GET`,
-                url: `${BASE_URL}tournaments.json?api_key=${API_KEY}`
-            }).then((response) => {
-                // loop through the teams in the response
-                // let arrayIn = [];
-                // for(let fixArray of response.data.groups) {
-                //     arrayIn.push(fixArray.teams);
-                //     // console.log(`Action payload: ${test.teams.name}`);
-                // }
-                // let flatArray = newArray.flat();
-                res.send(response.data.tournaments);
-            }).catch((axiosError) => {
-                // console log and client error message for axios request
-                console.log(`Error in axios GET request for league data: ${axiosError}`);
-                res.sendStatus(500);
-            }); 
-    // }).catch((poolError) => {
-    //     // console log and client message for error
-    //     console.log(`Error in API get for initial team stats: ${poolError}`);
-    //     res.sendStatus(500);
-    // });
+            // axios({
+            //     method: `GET`,
+            //     url: `${BASE_URL}tournaments.json?api_key=${API_KEY}`
+            // }).then((response) => {
+            //     // loop through the teams in the response
+            //     // let arrayIn = [];
+            //     // for(let fixArray of response.data.groups) {
+            //     //     arrayIn.push(fixArray.teams);
+            //     //     // console.log(`Action payload: ${test.teams.name}`);
+            //     // }
+            //     // let flatArray = newArray.flat();
+            //     res.send(response.data.tournaments);
+            // }).catch((axiosError) => {
+            //     // console log and client error message for axios request
+            //     console.log(`Error in axios GET request for league data: ${axiosError}`);
+            //     res.sendStatus(500);
+            // }); 
+    }).catch((poolError) => {
+        // console log and client message for error
+        console.log(`SQL error in getting league data: ${poolError}`);
+        res.sendStatus(500);
+    });
 });
 
 /**

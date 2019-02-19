@@ -6,6 +6,7 @@ import leaguesSaga from './leaguesSaga.js';
 import teamsSaga from './teamsSaga.js';
 import detailSaga from './detailSaga.js';
 import myteamsSaga from './myteamsSaga.js';
+import statsSaga from './statsSaga.js';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     teamsSaga(),
     detailSaga(),
     myteamsSaga(),
+    statsSaga(),
   ]);
 }

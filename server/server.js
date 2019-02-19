@@ -1,4 +1,3 @@
-
 const express = require('express');
 require('dotenv').config();
 
@@ -13,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const leaguesRouter = require('./routes/leagues.router');
 const teamsRouter = require('./routes/teams.router');
 const myteamsRouter = require('./routes/myteams.router');
+const statsRouter = require('./routes/stats.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/leagues', leaguesRouter);
 app.use('/api/teams', teamsRouter);
 app.use('/api/myteams', myteamsRouter);
+app.use('/api/stats', statsRouter);
 
 // Serve static files
 app.use(express.static('build'));

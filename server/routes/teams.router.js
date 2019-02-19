@@ -24,33 +24,34 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // GET route to select team data from Sportradar.us API after login
 router.get('/', (req, res) => {
-    // let queryText = `SELECT * FROM "teams" WHERE `;
-    // pool.query(queryText).then((result) => {
+    let queryText = `SELECT * FROM "teams";`;
+    pool.query(queryText).then((result) => {
+        res.send(result.rows);
     //     console.log(result.rows);
             // axios request to the sportradar.us API
             // console.log(`In teams GET route`);
-            axios({
-                method: `GET`,
-                url: `${BASE_URL}tournaments/sr:tournament:17/info.json?api_key=${API_KEY}`
-            }).then((response) => {
-                // loop through the teams in the response
-                let arrayIn = [];
-                for(let fixArray of response.data.groups) {
-                    arrayIn.push(fixArray.teams);
-                    // console.log(`Action payload: ${test.teams.name}`);
-                }
-                // let flatArray = newArray.flat();
-                res.send(arrayIn.flat());
-            }).catch((axiosError) => {
-                // console log and client error message for axios request
-                console.log(`Error in axios GET request for team data: ${axiosError}`);
-                res.sendStatus(500);
-            });
-    // }).catch((poolError) => {
-    //     // console log and client message for error
-    //     console.log(`Error in API get for initial team stats: ${poolError}`);
-    //     res.sendStatus(500);
-    // });
+            // axios({
+            //     method: `GET`,
+            //     url: `${BASE_URL}tournaments/sr:tournament:17/info.json?api_key=${API_KEY}`
+            // }).then((response) => {
+            //     // loop through the teams in the response
+            //     let arrayIn = [];
+            //     for(let fixArray of response.data.groups) {
+            //         arrayIn.push(fixArray.teams);
+            //         // console.log(`Action payload: ${test.teams.name}`);
+            //     }
+            //     // let flatArray = newArray.flat();
+            //     res.send(arrayIn.flat());
+            // }).catch((axiosError) => {
+            //     // console log and client error message for axios request
+            //     console.log(`Error in axios GET request for team data: ${axiosError}`);
+            //     res.sendStatus(500);
+            // });
+    }).catch((poolError) => {
+        // console log and client message for error
+        console.log(`GET error for teams in database sql: ${poolError}`);
+        res.sendStatus(500);
+    });
 });
 
 /**
