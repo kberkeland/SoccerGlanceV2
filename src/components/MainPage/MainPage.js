@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import MainPageItem from './MainPageItem.js';
 
@@ -10,6 +10,11 @@ class MainPage extends Component {
         this.props.dispatch({type: 'FETCH_MY_TEAMS'});
     }
 
+    // function to add a team to the users list of teams
+    addATeam = () => {
+
+    } // end addATeam
+
     static navigationOptions = { title: 'Home' };
 
     render() {
@@ -18,6 +23,11 @@ class MainPage extends Component {
                 {this.props.reduxStore.myteams.map((teams, i) => (
                     <MainPageItem key={i} teams={teams} navigation={this.props.navigation} />
                 ))}
+                <TouchableOpacity
+                    style={styles.card}
+                    onPress={this.addATeam}>
+                    <Text>Add another team</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -41,6 +51,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 3,
         borderColor: '#000',
+        justifyContent: 'center',
         width: 100,
         height: 100,
         margin: 5

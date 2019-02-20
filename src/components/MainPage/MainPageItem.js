@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 // import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 
@@ -17,13 +17,13 @@ class MainPageItem extends Component {
     render() {
         let record = `${this.props.teams.matches_won}-${this.props.teams.matches_drawn}-${this.props.teams.matches_lost}`;
         return (
-            <View style={styles.card}>
-                <Text>{this.props.teams.name}</Text>
-                <Text>{record}</Text>
-                <Button
-                    title="Details" 
-                    onPress={this.goToDetail}
-                />
+            <View>
+                <TouchableOpacity
+                    style={styles.card}
+                    onPress={this.goToDetail}>
+                    <Text>{this.props.teams.name}</Text>
+                    <Text>{record}</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 3,
         borderColor: '#000',
+        justifyContent: 'center',
         width: 100,
         height: 100,
         margin: 5
