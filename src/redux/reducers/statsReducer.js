@@ -1,4 +1,4 @@
-const statsReducer = (state = [], action) => {
+const statsReducer = (state = {}, action) => {
     if( action.type === 'SET_STATS' ) {
         return action.payload;
     } // end if

@@ -15,10 +15,12 @@ router.get('/:teamid', (req, res) => {
     let queryText = `SELECT *
                      FROM "stats"
                      WHERE "team_id" = $1;`;
-
     pool.query(queryText,[req.params.teamid]).then((result) => {
-        console.log(result.rows);
-        res.send(result.rows);
+        // let testObject = result.rows.values();
+        // console.log(testObject);
+        // console.log(testObject.matched_played);
+        // console.log(result.rows[0]);
+        res.send(result.rows[0]);
     // pool.query(queryText, [req.user.id]).then( async (result) => {
 
     //     let responseToClient = [];

@@ -11,8 +11,11 @@ class DetailPage extends Component {
     // }
 
     deleteMyteamOnPress = () => {
-        const action = {type: 'DELETE_MY_TEAM', payload: this.props.stats.id};
+        const action = {type: 'DELETE_MY_TEAM', payload: this.props.stats.team_id};
         this.props.dispatch(action);
+        this.props.dispatch({type: 'FETCH_MY_TEAMS', payload: this.props.user.id});
+        // this.props.navigation.navigate('Home');
+        this.props.navigation.pop();
     } // end deleteMyteam
 
     static navigationOptions = ({ navigation }) => {
@@ -25,8 +28,9 @@ class DetailPage extends Component {
     render() {
         const { navigation } = this.props;
         const teamName = navigation.getParam('teamName', 'Some team');
-        const record = this.props.reduxStore.stats.map(teamOut => 
-            `${teamOut.matches_won}-${teamOut.matches_drawn}-${teamOut.matches_lost}`);
+        // const record = this.props.reduxStore.stats.map(teamOut => 
+        //     `${teamOut.matches_won}-${teamOut.matches_drawn}-${teamOut.matches_lost}`);
+        const record = `${this.props.stats.matches_won}-${this.props.stats.matches_drawn}-${this.props.stats.matches_lost}`;
         const myteamId = navigation.getParam('myteamId', 'no myteamId');
 
         return (
@@ -40,16 +44,24 @@ class DetailPage extends Component {
                         title='Remove from my teams'
                         onPress={this.deleteMyteamOnPress}
                     />
-                {this.props.reduxStore.stats.map((stats, i) => (
+                    <Text>Matches played: {this.props.stats.matches_played}</Text>
+                    <Text>Matches won: {this.props.stats.matches_won}</Text>
+                    <Text>Matches drawn: {this.props.stats.matches_drawn}</Text>
+                    <Text>Matches lost: {this.props.stats.matches_lost}</Text>
+                    <Text>Goals scored: {this.props.stats.goals_scored}</Text>
+                    <Text>Goals conceded: {this.props.stats.goals_conceded}</Text>
+                    <Text>League position: {this.props.stats.group_position}</Text>
+                {/* {this.props.reduxStore.stats.map((stats, i) => (
                     <Text key={i}>{stats.id}</Text>
-                ))}
+                ))} */}
             </View>
         )
     }
 }
 
 const mapStoreToProps = reduxStore => ({
-    reduxStore,
+    stats: reduxStore.stats,
+    user: reduxStore.user
 });
 
 export default connect(mapStoreToProps)(DetailPage);

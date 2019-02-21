@@ -8,7 +8,6 @@ const axios = require('axios');
 const BASE_URL = 'https://api.sportradar.us/soccer-xt3/eu/en/';
 const API_KEY = process.env.API_KEY;
 
-
 router.get('/teams/:id', (req, res) => {
     // select statement for finding user team data
     let queryText = `SELECT "my_teams"."name", "my_teams"."competitor_id", "leagues"."tournament_id",
@@ -122,8 +121,10 @@ function getTeamStats(urlIn) {
 }
 
 router.delete('/', (req, res) => {
-    const queryText = `DELETE FROM "myteams" WHERE "id" = $1;`;
-    pool.query(queryText, [req.query.id]).then(() => {
+    const queryText = `DELETE FROM "my_teams"
+                       WHERE "person_id" = $1
+                       AND "team_id" = $2;`;
+    pool.query(queryText, [req.user.id, req.query.id]).then(() => {
         res.sendStatus(200);
     }).catch((poolError) => {
         console.log(`Error completing DELETE ${poolError}`);
