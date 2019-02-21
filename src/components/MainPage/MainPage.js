@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import MainPageItem from './MainPageItem.js';
+import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
 
 class MainPage extends Component {
 
@@ -14,8 +15,13 @@ class MainPage extends Component {
     addATeam = () => {
 
     } // end addATeam
-
-    static navigationOptions = { title: 'Home' };
+    
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: 'Home',
+            headerRight: <NativeLogoutButton navigation={navigation} />
+        }
+    };
 
     render() {
         return (
@@ -31,6 +37,7 @@ class MainPage extends Component {
             </View>
         )
     }
+
 }
 
 const mapStoreToProps = reduxStore => ({

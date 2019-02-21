@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import { connect } from 'react-redux';
+import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
 
 class DetailPage extends Component {
 
@@ -14,7 +15,12 @@ class DetailPage extends Component {
         this.props.dispatch(action);
     } // end deleteMyteam
 
-    static navigationOptions = { title: 'Details' };
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: 'Details',
+            headerRight: <NativeLogoutButton navigation={navigation} />
+        }
+    };
 
     render() {
         const { navigation } = this.props;
