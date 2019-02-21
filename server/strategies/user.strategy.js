@@ -14,6 +14,7 @@ passport.deserializeUser((id, done) => {
 
     if (!user) {
       // user not found
+      console.log('not found');
       done(null, false, { message: 'Incorrect credentials.' });
     } else {
       // user found

@@ -39,17 +39,31 @@ class NativeLoginForm extends Component {
         );
     }
 
-    loginUser = () => {
+    loginUser = async () => {
         if (this.state.username && this.state.password) {
             console.log(`Username: ${this.state.username} Password: ${this.state.password}`);
-            this.props.dispatch({
+            await this.props.dispatch({
                 type: 'LOGIN',
                 payload: {
                     username: this.state.username,
                     password: this.state.password,
                 },
             });
-            this.props.navigation.navigate('App');
+            setTimeout(() => {
+            // console.log(`User id: ${this.props.reduxStore.user.id}`);
+            // console.log(JSON.stringify(this.props.reduxStore.user));
+            // this.props.navigation.navigate('App');
+            if (this.props.reduxStore.user.id) {
+                this.props.navigation.navigate('App');
+            } else {
+                Alert.alert('Login failed', 'Please try again');
+            }            
+            }, 2000);
+            // if (user.id) {
+            //     this.props.navigation.navigate('App');
+            // } else {
+            //     Alert.alert('Login failed', 'Please try again');
+            // }
         } else {
             this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
         }
