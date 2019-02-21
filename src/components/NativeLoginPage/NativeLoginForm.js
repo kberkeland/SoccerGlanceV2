@@ -49,6 +49,7 @@ class NativeLoginForm extends Component {
                     password: this.state.password,
                 },
             });
+            this.props.navigation.navigate('App');
         } else {
             this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
         }

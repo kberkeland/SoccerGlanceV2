@@ -15,7 +15,7 @@ class NativeLoginPage extends Component {
                     <Text>This is a login page</Text>
                 </View>
                 <View style={styles.formContainer}>
-                    <NativeLoginForm />
+                    <NativeLoginForm navigation={this.props.navigation} />
                 </View>
             </KeyboardAvoidingView>
         )
