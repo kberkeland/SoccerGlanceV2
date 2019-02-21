@@ -7,8 +7,7 @@ class MainPage extends Component {
 
     componentDidMount() {
         // use component did mount to dispatch an action to request all of my teams
-        this.props.dispatch({type: 'FETCH_MY_TEAMS'});
-        console.log(this.props.reduxStore.user);
+        this.props.dispatch({type: 'FETCH_MY_TEAMS', payload: this.props.reduxStore.user.id});
     }
 
     // function to add a team to the users list of teams

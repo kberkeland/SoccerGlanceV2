@@ -42,28 +42,14 @@ class NativeLoginForm extends Component {
     loginUser = async () => {
         if (this.state.username && this.state.password) {
             console.log(`Username: ${this.state.username} Password: ${this.state.password}`);
-            await this.props.dispatch({
+            this.props.dispatch({
                 type: 'LOGIN',
                 payload: {
                     username: this.state.username,
                     password: this.state.password,
                 },
             });
-            setTimeout(() => {
-            // console.log(`User id: ${this.props.reduxStore.user.id}`);
-            // console.log(JSON.stringify(this.props.reduxStore.user));
-            // this.props.navigation.navigate('App');
-            if (this.props.reduxStore.user.id) {
-                this.props.navigation.navigate('App');
-            } else {
-                Alert.alert('Login failed', 'Please try again');
-            }            
-            }, 2000);
-            // if (user.id) {
-            //     this.props.navigation.navigate('App');
-            // } else {
-            //     Alert.alert('Login failed', 'Please try again');
-            // }
+            this.checkUserStatus();
         } else {
             this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
         }
@@ -78,10 +64,26 @@ class NativeLoginForm extends Component {
                     password: this.state.password,
                 },
             });
+            this.checkUserStatus();
         } else {
             this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
         }
     }; // end registerUser
+
+    checkUserStatus = () => {
+        // userToken = await 
+        // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+        setTimeout(() => {
+            // console.log(`User id: ${this.props.reduxStore.user.id}`);
+            // console.log(JSON.stringify(this.props.reduxStore.user));
+            // this.props.navigation.navigate('App');
+            if (this.props.reduxStore.user.id) {
+                this.props.navigation.navigate('App');
+            } else {
+                Alert.alert('Login failed', 'Please try again');
+            }            
+        }, 2000);
+    }
 }
 
 const styles = StyleSheet.create({

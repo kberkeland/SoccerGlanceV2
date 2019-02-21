@@ -7,12 +7,13 @@ function* myteamsSaga() {
 }
 
 // worker Saga: will be fired on "FETCH_TEAMS" actions
-function* findMyteams() {
+function* findMyteams(action) {
+    console.log('Action', action);
     try {
         // call to the database for team data
-        const response = yield axios.get('https://3cda369a.ngrok.io/api/myteams');
-        const action = {type: 'SET_MY_TEAMS', payload: response.data};
-        yield put(action);
+        const response = yield axios.get(`https://3cda369a.ngrok.io/api/myteams/teams/${action.payload}`);
+        const nextAction = {type: 'SET_MY_TEAMS', payload: response.data};
+        yield put(nextAction);
     } catch (error) {
         // error message when trying to get team list
         console.log(`Get request failed for myteams: ${error}`);
