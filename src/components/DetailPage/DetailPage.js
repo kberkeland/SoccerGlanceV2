@@ -25,7 +25,8 @@ class DetailPage extends Component {
     render() {
         const { navigation } = this.props;
         const teamName = navigation.getParam('teamName', 'Some team');
-        const record = navigation.getParam('newRecord', 'some default value');
+        const record = this.props.reduxStore.stats.map(teamOut => 
+            `${teamOut.matches_won}-${teamOut.matches_drawn}-${teamOut.matches_lost}`);
         const myteamId = navigation.getParam('myteamId', 'no myteamId');
 
         return (

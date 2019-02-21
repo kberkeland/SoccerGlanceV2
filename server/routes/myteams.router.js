@@ -11,7 +11,6 @@ const API_KEY = process.env.API_KEY;
 
 router.get('/teams/:id', (req, res) => {
     // select statement for finding user team data
-    console.log(req.params.id);
     let queryText = `SELECT "my_teams"."name", "my_teams"."competitor_id", "leagues"."tournament_id",
                             "stats"."matches_won", "stats"."matches_drawn", "stats"."matches_lost",
                             "my_teams"."id", "teams"."id" AS "team_id"
