@@ -9,7 +9,7 @@ function* leaguesSaga() {
 function* findLeagues() {
     try {
         // call to the database for league data
-        const response = yield axios.get('https://ae0475c8.ngrok.io/api/leagues');
+        const response = yield axios.get('https://3cda369a.ngrok.io/api/leagues');
         const action = {type: 'SET_LEAGUES', payload: response.data};
         yield put(action);
     } catch (error) {

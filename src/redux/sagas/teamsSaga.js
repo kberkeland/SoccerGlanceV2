@@ -21,7 +21,7 @@ function* addUserTeam(action) {
 function* findTeams() {
     try {
         // call to the database for team data
-        const response = yield axios.get('https://ae0475c8.ngrok.io/api/teams');
+        const response = yield axios.get('https://3cda369a.ngrok.io/api/teams');
         console.log(response);
         const action = {type: 'SET_TEAMS', payload: response.data};
         yield put(action);

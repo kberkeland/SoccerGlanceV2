@@ -5,10 +5,6 @@ import NativeLoginForm from './NativeLoginForm.js';
 
 
 class NativeLoginPage extends Component {
-    state = {
-        username: '',
-        password: '',
-    }
 
     static navigationOptions = { title: 'Please sign in or register' };
 
@@ -24,21 +20,6 @@ class NativeLoginPage extends Component {
             </KeyboardAvoidingView>
         )
     }
-
-    login = async () => {
-        if (this.state.username && this.state.password) {
-            this.props.dispatch({
-                type: 'LOGIN',
-                payload: {
-                    username: this.state.username,
-                    password: this.state.password,
-                },
-            });
-        } else {
-            this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-        }
-    };
-
 }
 
 const mapStoreToProps = reduxStore => ({

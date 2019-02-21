@@ -21,7 +21,7 @@ function* changeDetail(action) {
 function* getDetail() {
     try {
         // call to the database for details about the selected team
-        const response = yield axios.get('https://ae0475c8.ngrok.io/api/detail');
+        const response = yield axios.get('https://3cda369a.ngrok.io/api/detail');
         const action = {type: 'SET_DETAIL', payload: response.data};
         yield put(action);
     } catch (error) {

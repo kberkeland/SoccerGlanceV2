@@ -10,7 +10,7 @@ function* myteamsSaga() {
 function* findMyteams() {
     try {
         // call to the database for team data
-        const response = yield axios.get('https://ae0475c8.ngrok.io/api/myteams');
+        const response = yield axios.get('https://3cda369a.ngrok.io/api/myteams');
         const action = {type: 'SET_MY_TEAMS', payload: response.data};
         yield put(action);
     } catch (error) {
@@ -22,7 +22,7 @@ function* findMyteams() {
 // function for DELETE when user chooses to remove a team
 function* deleteMyteam(action) {
     try {
-        yield axios.delete(`https://ae0475c8.ngrok.io/api/myteams?id=${action.payload}`);
+        yield axios.delete(`https://3cda369a.ngrok.io/api/myteams?id=${action.payload}`);
         const nextAction = {type: 'SET_MY_TEAMS'};
         yield put(nextAction);
     } catch (error) {

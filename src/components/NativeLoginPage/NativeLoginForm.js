@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, Button ,StyleSheet ,StatusBar} from 'react-native';
-
-const onButtonPress = () => {
-  Alert.alert('Button has been pressed!');
-};
-
+import { connect } from 'react-redux';
 
 // create a component
-class LoginForm extends Component {
+class NativeLoginForm extends Component {
+    state = {
+        username: '',
+        password: '',
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -19,23 +20,55 @@ class LoginForm extends Component {
                             keyboardType='email-address' 
                             returnKeyType="next" 
                             placeholder='Username' 
+                            onChangeText={(username) => this.setState({username})}
                             placeholderTextColor='rgba(225,225,225,0.7)'/>
 
                 <TextInput style = {styles.input}   
                            returnKeyType="go" ref={(input)=> this.passwordInput = input} 
                            placeholder='Password' 
-                           placeholderTextColor='rgba(225,225,225,0.7)' 
+                           placeholderTextColor='rgba(225,225,225,0.7)'
+                           onChangeText={(password) => this.setState({password})}
                            secureTextEntry/>
-                 {/*   <Button onPress={onButtonPress} title = 'Login' style={styles.loginButton} /> */}
-              <TouchableOpacity style={styles.buttonContainer} onPress={onButtonPress}>
-                    <Text  style={styles.buttonText}>LOGIN</Text>
+                <TouchableOpacity style={styles.buttonContainer} onPress={this.loginUser}>
+                    <Text style={styles.buttonText}>LOGIN</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity style={styles.registerButtonContainer} onPress={this.registerUser}>
+                    <Text style={styles.buttonText}>REGISTER</Text>
                 </TouchableOpacity> 
             </View>
         );
     }
+
+    loginUser = () => {
+        if (this.state.username && this.state.password) {
+            console.log(`Username: ${this.state.username} Password: ${this.state.password}`);
+            this.props.dispatch({
+                type: 'LOGIN',
+                payload: {
+                    username: this.state.username,
+                    password: this.state.password,
+                },
+            });
+        } else {
+            this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+        }
+    }; // end loginUser
+
+    registerUser = () => {
+        if (this.state.username && this.state.password) {
+            this.props.dispatch({
+                type: 'REGISTER',
+                payload: {
+                    username: this.state.username,
+                    password: this.state.password,
+                },
+            });
+        } else {
+            this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+        }
+    }; // end registerUser
 }
 
-// define your styles
 const styles = StyleSheet.create({
     container: {
      padding: 20
@@ -51,6 +84,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#2980b6',
         paddingVertical: 15
     },
+    registerButtonContainer:{
+        backgroundColor: '#7DD8F2',
+        paddingVertical: 15
+    },
     buttonText:{
         color: '#fff',
         textAlign: 'center',
@@ -63,5 +100,8 @@ const styles = StyleSheet.create({
    
 });
 
-//make this component available to the app
-export default LoginForm;
+const mapStoreToProps = reduxStore => ({
+    reduxStore,
+});
+
+export default connect(mapStoreToProps)(NativeLoginForm);
