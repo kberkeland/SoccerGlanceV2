@@ -7,7 +7,7 @@ import moment from 'moment';
 class MainPageItem extends Component {
 
     goToDetail = () => {
-        console.log(`in goToDetail: ${this.props.teams.id}`);
+        console.log(`in goToDetail: ${this.props.teams.competitor_id}`);
         const action = {type: 'FETCH_STATS', payload: this.props.teams.team_id};
         this.props.dispatch(action);
         this.props.navigation.navigate('Detail', { teamName: this.props.teams.name,
