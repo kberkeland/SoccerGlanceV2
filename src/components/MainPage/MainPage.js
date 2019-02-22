@@ -13,7 +13,8 @@ class MainPage extends Component {
 
     // function to add a team to the users list of teams
     addATeam = () => {
-
+        this.props.dispatch({type: 'FETCH_LEAGUES'});
+        this.props.navigation.navigate('League');
     } // end addATeam
     
     static navigationOptions = ({ navigation }) => {

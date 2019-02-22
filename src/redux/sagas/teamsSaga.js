@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import Ngrok from './../../components/Ngrok.js';
 
 function* teamsSaga() {
     yield takeLatest('FETCH_TEAMS', findTeams);
@@ -10,7 +11,7 @@ function* teamsSaga() {
 function* addUserTeam(action) {
     try {
         // call to the database for team data
-        yield axios.post('api/teams', action.payload);
+        yield axios.post(`${Ngrok.NGROK}api/teams`, action.payload);
     } catch (error) {
         // error message when trying to add a team
         console.log(`Add team request failed: ${error}`);
@@ -21,7 +22,7 @@ function* addUserTeam(action) {
 function* findTeams() {
     try {
         // call to the database for team data
-        const response = yield axios.get('https://3cda369a.ngrok.io/api/teams');
+        const response = yield axios.get(`${Ngrok.NGROK}/api/teams`);
         console.log(response);
         const action = {type: 'SET_TEAMS', payload: response.data};
         yield put(action);

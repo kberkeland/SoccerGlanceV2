@@ -3,6 +3,8 @@ import { createAppContainer, createStackNavigator, createDrawerNavigator, create
 import MainPage from '../components/MainPage/MainPage.js';
 import DetailPage from '../components/DetailPage/DetailPage.js';
 import NativeLoginPage from '../components/NativeLoginPage/NativeLoginPage.js';
+import ChooseLeague from '../components/AddATeam/ChooseLeague.js';
+import ChooseTeam from '../components/AddATeam/ChooseTeam.js';
 
 // // Navigators
 // import { DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation';
@@ -27,8 +29,9 @@ import NativeLoginPage from '../components/NativeLoginPage/NativeLoginPage.js';
 //     Tabs: { screen: Tabs },
 // })
 
-const AppStack = createStackNavigator({ Home: MainPage, Detail: DetailPage });
+const AppStack = createStackNavigator({ Home: MainPage, Detail: DetailPage, League: ChooseLeague, Team: ChooseTeam });
 const AuthStack = createStackNavigator({ SignIn: NativeLoginPage });
+// const AddTeamStack = createStackNavigator({ League: ChooseLeague, Team: ChooseTeam });
 
 const RootStack = createAppContainer(createSwitchNavigator({
     App: AppStack,

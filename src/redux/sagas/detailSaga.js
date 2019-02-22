@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import Ngrok from './../../components/Ngrok.js';
 
 function* detailSaga() {
     yield takeLatest('FETCH_DETAIL', getDetail);
@@ -10,7 +11,7 @@ function* detailSaga() {
 function* changeDetail(action) {
     try {
         // call to the database for team data
-        yield axios.put('api/teams', action.payload);
+        yield axios.put(`${Ngrok.NGROK}/api/teams`, action.payload);
     } catch (error) {
         // error message when trying to add a team
         console.log(`Add team request failed: ${error}`);
@@ -21,7 +22,7 @@ function* changeDetail(action) {
 function* getDetail() {
     try {
         // call to the database for details about the selected team
-        const response = yield axios.get('https://3cda369a.ngrok.io/api/detail');
+        const response = yield axios.get(`${Ngrok.NGROK}/api/detail`);
         const action = {type: 'SET_DETAIL', payload: response.data};
         yield put(action);
     } catch (error) {

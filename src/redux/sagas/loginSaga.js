@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import Ngrok from './../../components/Ngrok.js';
 
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser(action) {
@@ -15,7 +16,7 @@ function* loginUser(action) {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
-    yield axios.post('https://3cda369a.ngrok.io/api/user/login', action.payload, config);
+    yield axios.post(`${Ngrok.NGROK}/api/user/login`, action.payload, config);
     
     // after the user has logged in
     // get the user information from the server
@@ -47,7 +48,7 @@ function* logoutUser(action) {
     // allow the server session to recognize the user
     // when the server recognizes the user session
     // it will end the session
-    yield axios.post('https://3cda369a.ngrok.io/api/user/logout', config);
+    yield axios.post(`${Ngrok.NGROK}/api/user/logout`, config);
 
     // now that the session has ended on the server
     // remove the client-side user object to let

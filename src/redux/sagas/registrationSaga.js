@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import Ngrok from './../../components/Ngrok.js';
 
 // worker Saga: will be fired on "REGISTER" actions
 function* registerUser(action) {
@@ -8,7 +9,7 @@ function* registerUser(action) {
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
 
     // passes the username and password from the payload to the server
-    yield axios.post('https://3cda369a.ngrok.io/api/user/register', action.payload);
+    yield axios.post(`${Ngrok.NGROK}/api/user/register`, action.payload);
 
     // automatically log a user in after registration
     yield put({ type: 'LOGIN', payload: action.payload });

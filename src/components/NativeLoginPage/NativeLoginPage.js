@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, ScrollView, TextInput, KeyboardAvoiding
 import { connect } from 'react-redux';
 import NativeLoginForm from './NativeLoginForm.js';
 
-
 class NativeLoginPage extends Component {
 
     static navigationOptions = { title: 'Please sign in or register' };

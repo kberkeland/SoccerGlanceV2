@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import Ngrok from './../../components/Ngrok.js';
 
 function* statsSaga() {
     yield takeLatest('FETCH_STATS', getStats);
@@ -11,7 +12,7 @@ function* getStats(action) {
     try {
         // call to the database for a teams stats
         console.log(`in getStats:${action.payload}`);
-        const response = yield axios.get(`https://3cda369a.ngrok.io/api/stats/${action.payload}`);
+        const response = yield axios.get(`${Ngrok.NGROK}/api/stats/${action.payload}`);
         const nextAction = {type: 'SET_STATS', payload: response.data};
         yield put(nextAction);
     } catch (error) {

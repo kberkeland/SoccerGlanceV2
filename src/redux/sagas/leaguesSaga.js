@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import Ngrok from './../../components/Ngrok.js';
 
 function* leaguesSaga() {
     yield takeLatest('FETCH_LEAGUES', findLeagues);
@@ -9,7 +10,7 @@ function* leaguesSaga() {
 function* findLeagues() {
     try {
         // call to the database for league data
-        const response = yield axios.get('https://3cda369a.ngrok.io/api/leagues');
+        const response = yield axios.get(`${Ngrok.NGROK}/api/leagues`);
         const action = {type: 'SET_LEAGUES', payload: response.data};
         yield put(action);
     } catch (error) {
