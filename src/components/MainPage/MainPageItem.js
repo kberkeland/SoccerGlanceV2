@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 // import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 class MainPageItem extends Component {
 
@@ -22,7 +23,8 @@ class MainPageItem extends Component {
                     style={styles.card}
                     onPress={this.goToDetail}>
                     <Text>{this.props.teams.name}</Text>
-                    <Text>{record}</Text>
+                    <Text>Last game: {this.props.teams.last_game}</Text>
+                    <Text>Next game: {moment(this.props.teams.next_game).format("dddd, MMMM Do YYYY")}</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -41,8 +43,8 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         borderColor: '#000',
         justifyContent: 'center',
-        width: 100,
-        height: 100,
+        width: 150 ,
+        height: 150,
         margin: 5
     },
 });

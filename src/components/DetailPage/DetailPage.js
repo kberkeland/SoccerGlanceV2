@@ -36,10 +36,11 @@ class DetailPage extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>{teamName}</Text>
-                    <View style={styles.card}>
+                <Text style={styles.heading}>{record}</Text>
+                    {/* <View style={styles.card}>
                         <Text style={styles.cardText}>{teamName}</Text>
                         <Text style={styles.cardText}>{record}</Text>
-                    </View>
+                    </View> */}
                     <Button
                         title='Remove from my teams'
                         onPress={this.deleteMyteamOnPress}

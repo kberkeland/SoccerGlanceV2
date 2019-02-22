@@ -12,7 +12,8 @@ router.get('/teams/:id', (req, res) => {
     // select statement for finding user team data
     let queryText = `SELECT "my_teams"."name", "my_teams"."competitor_id", "leagues"."tournament_id",
                             "stats"."matches_won", "stats"."matches_drawn", "stats"."matches_lost",
-                            "my_teams"."id", "teams"."id" AS "team_id"
+                            "my_teams"."id", "teams"."id" AS "team_id",
+                            "stats"."last_game", "stats"."next_game"
                      FROM "my_teams"
                      JOIN "leagues" ON "leagues"."id" = "my_teams"."league_id"
                      JOIN "teams" ON "teams"."competitor_id" = "my_teams"."competitor_id"
