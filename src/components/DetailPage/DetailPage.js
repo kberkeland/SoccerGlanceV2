@@ -46,14 +46,14 @@ class DetailPage extends Component {
                 /> */}
                 <Text style={styles.heading}>{currentTeam.name}</Text>
                 {/* <Text style={styles.heading}>{currentTrecord}</Text> */}
-                    <Text>Wins: {teamStats.win.total}</Text>
-                    <Text>Draws: {teamStats.draw.total}</Text>
-                    <Text>Lost: {teamStats.lost.total}</Text>
-                    <Text>Average goals scored: {teamStats.avg_goals_per_game_scored.total}</Text>
-                    <Text>Average goals conceded: {teamStats.avg_goals_per_game_conceded.total}</Text>
-                    <Text>Clean sheets: {teamStats.clean_sheet.total}</Text>
-                    <Text>Goals scored: {teamStats.goals_for.total}</Text>
-                    <Text>Goals conceded: {teamStats.goals_against.total}</Text>
+                    <Text style={styles.pageitems}>Wins: {teamStats.win.total}</Text>
+                    <Text style={styles.pageitems}>Draws: {teamStats.draw.total}</Text>
+                    <Text style={styles.pageitems}>Lost: {teamStats.lost.total}</Text>
+                    <Text style={styles.pageitems}>Average goals scored: {teamStats.avg_goals_per_game_scored.total}</Text>
+                    <Text style={styles.pageitems}>Average goals conceded: {teamStats.avg_goals_per_game_conceded.total}</Text>
+                    <Text style={styles.pageitems}>Clean sheets: {teamStats.clean_sheet.total}</Text>
+                    <Text style={styles.pageitems}>Goals scored: {teamStats.goals_for.total}</Text>
+                    <Text style={styles.pageitems}>Goals conceded: {teamStats.goals_against.total}</Text>
                     <Button title='Remove this team?' onPress={() => this.deleteMyteamOnPress(currentTeam.id, currentTeam.name)} />
                 {/* {this.props.reduxStore.stats.teamStats.map((stats, i) => (
                     <Text key={i}>{stats}</Text>
@@ -87,6 +87,10 @@ const styles = StyleSheet.create({
         margin: 5
     },
     heading: {
+        textAlign: 'center',
+        fontSize: 50
+    },
+    pageitems: {
         textAlign: 'center',
         fontSize: 20
     },

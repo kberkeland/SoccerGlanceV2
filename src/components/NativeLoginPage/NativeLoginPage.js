@@ -11,7 +11,7 @@ class NativeLoginPage extends Component {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={styles.loginContainer}>
-                    <Text>This is a login page</Text>
+                    <Text>Please log in or register</Text>
                 </View>
                 <View style={styles.formContainer}>
                     <NativeLoginForm navigation={this.props.navigation} />
