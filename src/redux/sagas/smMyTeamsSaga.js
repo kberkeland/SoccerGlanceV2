@@ -12,7 +12,7 @@ function* findSmMyTeams(action) {
     // console.log('Action', action);
     try {
         // call to the database for team data
-        const response = yield axios.get(`${Ngrok.NGROK}/api/sportsmonkey/${action.payload}`);
+        const response = yield axios.get(`${Ngrok.NGROK}/api/sportmonks/${action.payload}`);
         const nextAction = {type: 'SET_SM_MY_TEAMS', payload: response.data};
         yield put(nextAction);
     } catch (error) {
@@ -24,7 +24,7 @@ function* findSmMyTeams(action) {
 // function for DELETE when user chooses to remove a team
 function* deleteSmMyTeam(action) {
     try {
-        yield axios.delete(`${Ngrok.NGROK}/api/sportsmonkey?id=${action.payload}`);
+        yield axios.delete(`${Ngrok.NGROK}/api/sportmonks?id=${action.payload}`);
         const nextAction = {type: 'SET_SM_MY_TEAMS'};
         yield put(nextAction);
     } catch (error) {
