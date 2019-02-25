@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
 // import { withNavigation } from 'react-navigation';
-import { Card }from 'react-native-elements';
+import { Card, Tile }from 'react-native-elements';
 import { connect } from 'react-redux';
 import moment from 'moment';
 // import { FlatList } from 'react-native-gesture-handler';
@@ -24,12 +24,20 @@ class MainPageItem extends Component {
             <View>
                 <TouchableOpacity
                     onPress={this.goToDetail}>
-                    <Card
+                    {/* <Tile 
+                      imageSrc={{uri: this.props.teams.logo_path}}
+                      title={this.props.teams.name}
+                    /> */}
+                    {/* <Card
                         title={this.props.teams.name}
                         image={{uri: this.props.teams.logo_path}}>
                         <Text style={{marginBottom: 10}}>
                             The idea with React Native Elements is more about component structure than actual design.
                         </Text>
+                    </Card> */}
+                    <Card
+                        title={this.props.teams.name}
+                        image={{uri: this.props.teams.logo_path}}>
                     </Card>
                 </TouchableOpacity>
             </View>

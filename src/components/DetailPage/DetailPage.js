@@ -48,7 +48,7 @@ class DetailPage extends Component {
                 {/* <Text style={styles.heading}>{currentTrecord}</Text> */}
                     <Text style={styles.pageitems}>Wins: {teamStats.win.total}</Text>
                     <Text style={styles.pageitems}>Draws: {teamStats.draw.total}</Text>
-                    <Text style={styles.pageitems}>Lost: {teamStats.lost.total}</Text>
+                    <Text style={styles.pageitems}>Losses: {teamStats.lost.total}</Text>
                     <Text style={styles.pageitems}>Average goals scored: {teamStats.avg_goals_per_game_scored.total}</Text>
                     <Text style={styles.pageitems}>Average goals conceded: {teamStats.avg_goals_per_game_conceded.total}</Text>
                     <Text style={styles.pageitems}>Clean sheets: {teamStats.clean_sheet.total}</Text>

@@ -18,7 +18,8 @@ router.get('/:personId', (req, res) => {
         // console.log(newResult.data)
         let queryText = `SELECT *
                          FROM "sm_my_teams"
-                         WHERE "sm_my_teams"."person_id" = $1;`;
+                         WHERE "sm_my_teams"."person_id" = $1
+                         ORDER BY "sm_my_teams"."name";`;
         pool.query(queryText, [req.params.personId]).then((result) => {
             // console.log(result.rows);
             let dataToSend = [];

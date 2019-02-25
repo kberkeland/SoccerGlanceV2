@@ -11,7 +11,7 @@ class NativeLoginPage extends Component {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={styles.loginContainer}>
-                    <Text>Please log in or register</Text>
+                    <Text style={styles.heading}>Please log in or register</Text>
                 </View>
                 <View style={styles.formContainer}>
                     <NativeLoginForm navigation={this.props.navigation} />
@@ -30,13 +30,14 @@ export default connect(mapStoreToProps)(NativeLoginPage);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // backgroundColor: '#F5FCFF'
         backgroundColor: '#2c3e50',
     },
     loginContainer:{
         alignItems: 'center',
         flexGrow: 1,
         justifyContent: 'center',
-        color: 'black'
+        color: 'black',
     },
     logo: {
         position: 'absolute',
@@ -49,5 +50,9 @@ const styles = StyleSheet.create({
         width: 180,
         textAlign: 'center',
         opacity: 0.9
-}
+    },
+    heading: {
+        textAlign: 'center',
+        fontSize: 50
+    },
 });
