@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Dimension
 import { connect } from 'react-redux';
 import MainPageItem from './MainPageItem.js';
 import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
+import AddATeamButton from './../AddATeamButton/AddATeamButton.js';
 
 var {windowHeight, windowWidth} = Dimensions.get('window');
 
@@ -21,8 +22,9 @@ class MainPage extends Component {
     
     static navigationOptions = ({ navigation }) => {
         return {
+            headerLeft: <NativeLogoutButton navigation={navigation} />,
             headerTitle: 'Home',
-            headerRight: <NativeLogoutButton navigation={navigation} />
+            headerRight: <AddATeamButton navigation={navigation} />,
         }
     };
 
@@ -33,11 +35,11 @@ class MainPage extends Component {
                 {this.props.reduxStore.smMyTeams.map((teams, i) => (
                     <MainPageItem key={i} teams={teams} navigation={this.props.navigation} />
                 ))}
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.card}
                     onPress={this.addATeam}>
                     <Text>Add another team</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 </ScrollView>
             </View>
         )

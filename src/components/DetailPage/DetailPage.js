@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
 
@@ -10,18 +10,20 @@ class DetailPage extends Component {
     //     this.props.dispatch(action);
     // }
 
-    deleteMyteamOnPress = () => {
-        const action = {type: 'DELETE_MY_TEAM', payload: teamStats.id};
+    deleteMyteamOnPress = (teamIdIn, teamNameIn) => {
+        const action = {type: 'DELETE_SM_MY_TEAM', payload: teamIdIn};
         this.props.dispatch(action);
         this.props.dispatch({type: 'FETCH_SM_MY_TEAMS', payload: this.props.user.id});
         // this.props.navigation.navigate('Home');
+        Alert.alert(`${teamNameIn}`, 'Was deleted from your teams');
         this.props.navigation.pop();
+        // this.props.navigation.navigate('Home');
     } // end deleteMyteam
 
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: 'Details',
-            headerRight: <Button title='Remove team' onPress={this.deleteMyteamOnPress} />
+            headerRight: <NativeLogoutButton navigation={navigation}/>
         }
     };
 
@@ -52,6 +54,7 @@ class DetailPage extends Component {
                     <Text>Clean sheets: {teamStats.clean_sheet.total}</Text>
                     <Text>Goals scored: {teamStats.goals_for.total}</Text>
                     <Text>Goals conceded: {teamStats.goals_against.total}</Text>
+                    <Button title='Remove this team?' onPress={() => this.deleteMyteamOnPress(currentTeam.id, currentTeam.name)} />
                 {/* {this.props.reduxStore.stats.teamStats.map((stats, i) => (
                     <Text key={i}>{stats}</Text>
                 ))} */}

@@ -5,7 +5,7 @@ import NativeLoginForm from './NativeLoginForm.js';
 
 class NativeLoginPage extends Component {
 
-    static navigationOptions = { title: 'Please sign in or register' };
+    static navigationOptions = { title: 'Soccer Glance' };
 
     render() {
         return (
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     loginContainer:{
         alignItems: 'center',
         flexGrow: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        color: 'black'
     },
     logo: {
         position: 'absolute',

@@ -54,4 +54,17 @@ async function getApiStats(urlIn, teamidIn) {
 
 }
 
+router.delete('/', (req, res) => {
+    console.log(`In delete: ${req.query.id}`);
+    const queryText = `DELETE FROM "sm_my_teams"
+                       WHERE "person_id" = $1
+                       AND "team_id" = $2;`;
+    pool.query(queryText, [req.user.id, req.query.id]).then(() => {
+        res.sendStatus(200);
+    }).catch((poolError) => {
+        console.log(`Error completing DELETE ${poolError}`);
+        res.sendStatus(500);
+    });
+});
+
 module.exports = router;

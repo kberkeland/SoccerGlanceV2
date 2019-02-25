@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, FlatList, ActivityIndicator, Switch, ScrollView } from "react-native";
+import { StyleSheet, View, Text, FlatList, ActivityIndicator, Switch, ScrollView, Alert } from "react-native";
 import { List, ListItem, SearchBar, Button, Icon } from "react-native-elements";
 import { connect } from 'react-redux';
 import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
@@ -14,7 +14,8 @@ class ChooseTeam extends Component {
         this.props.dispatch(action);
         this.props.dispatch({type: 'FETCH_SM_MY_TEAMS', payload: this.props.user.id});
         // this.props.navigation.navigate('Home');
-        this.props.navigation.pop().pop();
+        Alert.alert(`${action.payload.name}`, 'Was added to your teams');
+        this.props.navigation.navigate('Home');
     } // end deleteMyteam
 
     static navigationOptions = ({ navigation }) => {
