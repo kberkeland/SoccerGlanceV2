@@ -13,7 +13,7 @@ class DetailPage extends Component {
     deleteMyteamOnPress = () => {
         const action = {type: 'DELETE_MY_TEAM', payload: teamStats.id};
         this.props.dispatch(action);
-        this.props.dispatch({type: 'FETCH_MY_TEAMS', payload: this.props.user.id});
+        this.props.dispatch({type: 'FETCH_SM_MY_TEAMS', payload: this.props.user.id});
         // this.props.navigation.navigate('Home');
         this.props.navigation.pop();
     } // end deleteMyteam

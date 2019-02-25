@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
             }
         }
         
-        console.log(dataToSend);
+        // console.log(dataToSend);
         res.send(dataToSend);
     }).catch((newError) => {
         console.log(`New error with stats: ${newError}`);

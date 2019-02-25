@@ -41,7 +41,7 @@ class NativeLoginForm extends Component {
 
     loginUser = async () => {
         if (this.state.username && this.state.password) {
-            console.log(`Username: ${this.state.username} Password: ${this.state.password}`);
+            // console.log(`Username: ${this.state.username} Password: ${this.state.password}`);
             this.props.dispatch({
                 type: 'LOGIN',
                 payload: {

@@ -13,14 +13,14 @@ const SEASONS_ID = '12962';
 router.get('/:personId', (req, res) => {
 
     let teamUrl = `${TEAMS_URL}${SEASONS_ID}?api_token=${API_KEY}&include=stats`;
-    console.log(teamUrl);
+    // console.log(teamUrl);
     getApiStats(teamUrl, req.params.teamid).then((newResult) => {
-        console.log(newResult.data)
+        // console.log(newResult.data)
         let queryText = `SELECT *
                          FROM "sm_my_teams"
                          WHERE "sm_my_teams"."person_id" = $1;`;
         pool.query(queryText, [req.params.personId]).then((result) => {
-            console.log(result.rows);
+            // console.log(result.rows);
             let dataToSend = [];
 
             for(let team of newResult.data) {
@@ -30,7 +30,7 @@ router.get('/:personId', (req, res) => {
                     }
                 }
             }
-            console.log(dataToSend);
+            // console.log(dataToSend);
             res.send(dataToSend);
         }).catch((poolError) => {
             console.log(`Query error for "sm_my_teams": ${poolError}`);

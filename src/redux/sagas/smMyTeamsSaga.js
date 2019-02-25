@@ -9,7 +9,7 @@ function* smMyTeamsSaga() {
 
 // worker Saga: will be fired on "FETCH_TEAMS" actions
 function* findSmMyTeams(action) {
-    console.log('Action', action);
+    // console.log('Action', action);
     try {
         // call to the database for team data
         const response = yield axios.get(`${Ngrok.NGROK}/api/sportsmonkey/${action.payload}`);
