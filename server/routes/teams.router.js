@@ -5,54 +5,35 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const axios = require('axios');
 
 // constant variables for use in API url setup
-const BASE_URL = 'https://api.sportradar.us/soccer-xt3/eu/en/';
-const API_KEY = process.env.API_KEY;
+const LEAGUES_URL = 'https://soccer.sportmonks.com/api/v2.0/leagues/';
+const TEAMS_URL = 'https://soccer.sportmonks.com/api/v2.0/teams/season/';
+const API_KEY = process.env.SPORTSMONKS_API;
+const SEASONS_ID = '12962';
 
-router.post('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `INSERT INTO "teams" (")`
+router.get('/:seasonId', (req, res) => {
 
-}); // end POST to user teams
+    let teamUrl = `${TEAMS_URL}${req.params.seasonId}?api_token=${API_KEY}`;
 
-// Tournaments info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments.json?api_key=
-
-// Specific tournament info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/info.json?api_key=
-
-// Team info
-// https://api.sportradar.us/soccer-xt3/eu/en/tournaments/sr:tournament:17/teams/sr:competitor:48/statistics.json?api_key=
-
-// GET route to select team data from Sportradar.us API after login
-router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM "teams";`;
-    pool.query(queryText).then((result) => {
-        res.send(result.rows);
-    //     console.log(result.rows);
-            // axios request to the sportradar.us API
-            // console.log(`In teams GET route`);
-            // axios({
-            //     method: `GET`,
-            //     url: `${BASE_URL}tournaments/sr:tournament:17/info.json?api_key=${API_KEY}`
-            // }).then((response) => {
-            //     // loop through the teams in the response
-            //     let arrayIn = [];
-            //     for(let fixArray of response.data.groups) {
-            //         arrayIn.push(fixArray.teams);
-            //         // console.log(`Action payload: ${test.teams.name}`);
-            //     }
-            //     // let flatArray = newArray.flat();
-            //     res.send(arrayIn.flat());
-            // }).catch((axiosError) => {
-            //     // console log and client error message for axios request
-            //     console.log(`Error in axios GET request for team data: ${axiosError}`);
-            //     res.sendStatus(500);
-            // });
-    }).catch((poolError) => {
-        // console log and client message for error
-        console.log(`GET error for teams in database sql: ${poolError}`);
+    getApiStats(teamUrl).then((newResult) => {
+        console.log(newResult.data);
+        res.send(newResult.data);
+    }).catch((newError) => {
+        console.log(`New error with stats: ${newError}`);
         res.sendStatus(500);
     });
-});
+
+}); // end of GET route for stats
+
+checkMyTeams = () => {
+
+}
+
+async function getApiStats(urlIn) {
+
+    let response = await axios.get(urlIn);
+    return response.data;
+
+}
 
 /**
  * POST route template

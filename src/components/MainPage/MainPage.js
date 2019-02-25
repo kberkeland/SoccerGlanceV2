@@ -10,7 +10,6 @@ class MainPage extends Component {
 
     componentDidMount() {
         // use component did mount to dispatch an action to request all of my teams
-        console.log('cdm');
         this.props.dispatch({type: 'FETCH_SM_MY_TEAMS', payload: this.props.reduxStore.user.id});
     }
 
