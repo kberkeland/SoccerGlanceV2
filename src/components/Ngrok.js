@@ -1,4 +1,4 @@
 export default {
-    NGROK: `https://2f8aa26e.ngrok.io`,
+    NGROK: `https://256f63ce.ngrok.io`,
     VALUE_2: "abc"
 };

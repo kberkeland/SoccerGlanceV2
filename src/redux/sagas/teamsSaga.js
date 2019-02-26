@@ -11,7 +11,8 @@ function* teamsSaga() {
 function* addUserTeam(action) {
     try {
         // call to the database for team data
-        yield axios.post(`${Ngrok.NGROK}api/teams`, action.payload);
+        console.log(action.payload);
+        yield axios.post(`${Ngrok.NGROK}/api/teams`, action.payload);
     } catch (error) {
         // error message when trying to add a team
         console.log(`Add team request failed: ${error}`);
@@ -19,13 +20,13 @@ function* addUserTeam(action) {
 }
 
 // worker Saga: will be fired on "FETCH_TEAMS" actions
-function* findTeams() {
+function* findTeams(action) {
     try {
         // call to the database for team data
-        const response = yield axios.get(`${Ngrok.NGROK}/api/teams`);
-        console.log(response);
-        const action = {type: 'SET_TEAMS', payload: response.data};
-        yield put(action);
+        const response = yield axios.get(`${Ngrok.NGROK}/api/teams/${action.payload}`);
+        // console.log(response);
+        const nextAction = {type: 'SET_TEAMS', payload: response.data};
+        yield put(nextAction);
     } catch (error) {
         // error message when trying to get team list
         console.log(`Get request failed for teams: ${error}`);

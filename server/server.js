@@ -12,7 +12,8 @@ const userRouter = require('./routes/user.router');
 const leaguesRouter = require('./routes/leagues.router');
 const teamsRouter = require('./routes/teams.router');
 const myteamsRouter = require('./routes/myteams.router');
-const statsRouter = require('./routes/stats.router');
+const statsRouter = require('./routes/statsapi.router');
+const sportmonksRouter = require('./routes/sportmonks.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/leagues', leaguesRouter);
 app.use('/api/teams', teamsRouter);
 app.use('/api/myteams', myteamsRouter);
 app.use('/api/stats', statsRouter);
+app.use('/api/sportmonks', sportmonksRouter);
 
 // Serve static files
 app.use(express.static('build'));

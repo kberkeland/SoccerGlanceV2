@@ -6,8 +6,9 @@ import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
 
 class ChooseLeague extends Component {
 
-    goToChooseTeam = () => {
-        this.props.dispatch({type: 'FETCH_TEAMS'});
+    goToChooseTeam = (itemIn) => {
+        console.log
+        this.props.dispatch({type: 'FETCH_TEAMS', payload: itemIn});
         this.props.navigation.navigate('Team');
     }
 
@@ -27,7 +28,7 @@ class ChooseLeague extends Component {
                         <ListItem
                             key={i}
                             title={item.name}
-                            onPress={this.goToChooseTeam}
+                            onPress={() => this.goToChooseTeam(item.current_season_id)}
                         />
                     )}
                 />

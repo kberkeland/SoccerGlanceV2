@@ -7,6 +7,7 @@ import teams from './teamsReducer.js';
 import detail from './detailReducer.js';
 import myteams from './myteamsReducer.js';
 import stats from './statsReducer.js';
+import smMyTeams from './smMyTeamsReducer.js';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   detail, // details of a selected team
   myteams, // list of myteams
   stats, // list of stats for a specific team
+  smMyTeams,
 });
 
 export default rootReducer;

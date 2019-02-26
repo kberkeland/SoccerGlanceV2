@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
 // import { withNavigation } from 'react-navigation';
+import { Card, Tile }from 'react-native-elements';
 import { connect } from 'react-redux';
 import moment from 'moment';
+// import { FlatList } from 'react-native-gesture-handler';
 
 class MainPageItem extends Component {
 
     goToDetail = () => {
-        console.log(`in goToDetail: ${this.props.teams.competitor_id}`);
-        const action = {type: 'FETCH_STATS', payload: this.props.teams.team_id};
-        this.props.dispatch(action);
-        this.props.navigation.navigate('Detail', { teamName: this.props.teams.name,
-                                                   newRecord: '1-1-1', 
-                                                   myteamId: this.props.teams.id});
+        // const action = {type: 'FETCH_STATS', payload: this.props.teams.competitor_id};
+        // this.props.dispatch(action);
+        this.props.navigation.navigate('Detail', { teamId: this.props.teams.id});
+        // setTimeout(() => {
+        //     this.props.navigation.navigate('Detail', { teamId: this.props.teams.id,
+        //                                                newRecord: '1-1-1', 
+        //                                                myteamId: this.props.teams.id});
+        // }, 1000);
     }
 
     render() {
-        let record = `${this.props.teams.matches_won}-${this.props.teams.matches_drawn}-${this.props.teams.matches_lost}`;
         return (
             <View>
                 <TouchableOpacity
-                    style={styles.card}
                     onPress={this.goToDetail}>
-                    <Text>{this.props.teams.name}</Text>
-                    <Text>Last game: {this.props.teams.last_game}</Text>
-                    <Text>Next game: {moment(this.props.teams.next_game).format("dddd, MMMM Do YYYY")}</Text>
+                    {/* <Tile 
+                      imageSrc={{uri: this.props.teams.logo_path}}
+                      title={this.props.teams.name}
+                    /> */}
+                    {/* <Card
+                        title={this.props.teams.name}
+                        image={{uri: this.props.teams.logo_path}}>
+                        <Text style={{marginBottom: 10}}>
+                            The idea with React Native Elements is more about component structure than actual design.
+                        </Text>
+                    </Card> */}
+                    <Card
+                        title={this.props.teams.name}
+                        image={{uri: this.props.teams.logo_path}}>
+                    </Card>
                 </TouchableOpacity>
             </View>
         )

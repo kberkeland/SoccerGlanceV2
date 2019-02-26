@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
 
@@ -10,50 +10,53 @@ class DetailPage extends Component {
     //     this.props.dispatch(action);
     // }
 
-    deleteMyteamOnPress = () => {
-        const action = {type: 'DELETE_MY_TEAM', payload: this.props.stats.team_id};
+    deleteMyteamOnPress = (teamIdIn, teamNameIn) => {
+        const action = {type: 'DELETE_SM_MY_TEAM', payload: teamIdIn};
         this.props.dispatch(action);
-        this.props.dispatch({type: 'FETCH_MY_TEAMS', payload: this.props.user.id});
+        this.props.dispatch({type: 'FETCH_SM_MY_TEAMS', payload: this.props.user.id});
         // this.props.navigation.navigate('Home');
+        Alert.alert(`${teamNameIn}`, 'Was deleted from your teams');
         this.props.navigation.pop();
+        // this.props.navigation.navigate('Home');
     } // end deleteMyteam
 
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: 'Details',
-            headerRight: <NativeLogoutButton navigation={navigation} />
+            headerRight: <NativeLogoutButton navigation={navigation}/>
         }
     };
 
     render() {
         const { navigation } = this.props;
-        const teamName = navigation.getParam('teamName', 'Some team');
-        // const record = this.props.reduxStore.stats.map(teamOut => 
-        //     `${teamOut.matches_won}-${teamOut.matches_drawn}-${teamOut.matches_lost}`);
-        const record = `${this.props.stats.matches_won}-${this.props.stats.matches_drawn}-${this.props.stats.matches_lost}`;
-        const myteamId = navigation.getParam('myteamId', 'no myteamId');
+        const teamId = navigation.getParam('teamId', 'Some team');
+        const currentTeam = this.props.smMyTeams.find( team => ( team.id === teamId ));
+        const teamStats = currentTeam.stats.data.find( stats => ( stats.season_id === currentTeam.current_season_id));
+        // console.log(currentTeam.stats.data);
+        // console.log(teamStats);
 
         return (
             <View style={styles.container}>
-                <Text style={styles.heading}>{teamName}</Text>
-                <Text style={styles.heading}>{record}</Text>
-                    {/* <View style={styles.card}>
-                        <Text style={styles.cardText}>{teamName}</Text>
-                        <Text style={styles.cardText}>{record}</Text>
-                    </View> */}
-                    <Button
-                        title='Remove from my teams'
-                        onPress={this.deleteMyteamOnPress}
-                    />
-                    <Text>Matches played: {this.props.stats.matches_played}</Text>
-                    <Text>Matches won: {this.props.stats.matches_won}</Text>
-                    <Text>Matches drawn: {this.props.stats.matches_drawn}</Text>
-                    <Text>Matches lost: {this.props.stats.matches_lost}</Text>
-                    <Text>Goals scored: {this.props.stats.goals_scored}</Text>
-                    <Text>Goals conceded: {this.props.stats.goals_conceded}</Text>
-                    <Text>League position: {this.props.stats.group_position}</Text>
-                {/* {this.props.reduxStore.stats.map((stats, i) => (
-                    <Text key={i}>{stats.id}</Text>
+                {/* <Text>{currentTeam.name}</Text> */}
+                {/* <FlatList
+                    data={teamStats}
+                    renderItem={({ item, i }) => (
+                        <Text>{item}</Text>
+                    )}
+                /> */}
+                <Text style={styles.heading}>{currentTeam.name}</Text>
+                {/* <Text style={styles.heading}>{currentTrecord}</Text> */}
+                    <Text style={styles.pageitems}>Wins: {teamStats.win.total}</Text>
+                    <Text style={styles.pageitems}>Draws: {teamStats.draw.total}</Text>
+                    <Text style={styles.pageitems}>Losses: {teamStats.lost.total}</Text>
+                    <Text style={styles.pageitems}>Average goals scored: {teamStats.avg_goals_per_game_scored.total}</Text>
+                    <Text style={styles.pageitems}>Average goals conceded: {teamStats.avg_goals_per_game_conceded.total}</Text>
+                    <Text style={styles.pageitems}>Clean sheets: {teamStats.clean_sheet.total}</Text>
+                    <Text style={styles.pageitems}>Goals scored: {teamStats.goals_for.total}</Text>
+                    <Text style={styles.pageitems}>Goals conceded: {teamStats.goals_against.total}</Text>
+                    <Button title='Remove this team?' onPress={() => this.deleteMyteamOnPress(currentTeam.id, currentTeam.name)} />
+                {/* {this.props.reduxStore.stats.teamStats.map((stats, i) => (
+                    <Text key={i}>{stats}</Text>
                 ))} */}
             </View>
         )
@@ -61,7 +64,7 @@ class DetailPage extends Component {
 }
 
 const mapStoreToProps = reduxStore => ({
-    stats: reduxStore.stats,
+    smMyTeams: reduxStore.smMyTeams,
     user: reduxStore.user
 });
 
@@ -84,6 +87,10 @@ const styles = StyleSheet.create({
         margin: 5
     },
     heading: {
+        textAlign: 'center',
+        fontSize: 50
+    },
+    pageitems: {
         textAlign: 'center',
         fontSize: 20
     },
