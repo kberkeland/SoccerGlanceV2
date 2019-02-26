@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "server": "nodemon --watch server server/server.js",
-    "test": "jest"
+    "test": "jest",
+    "testServer": "jest server/test/*.test.js --forceExit"
   },
   "dependencies": {
     "@expo/vector-icons": "^9.0.0",
@@ -31,10 +32,11 @@
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.1.0",
-    "jest": "24.1.0",
+    "jest": "^24.1.0",
     "metro-react-native-babel-preset": "0.51.1",
     "nodemon": "^1.18.10",
-    "react-test-renderer": "16.6.3"
+    "react-test-renderer": "16.6.3",
+    "supertest": "^3.4.2"
   },
   "jest": {
     "preset": "react-native"
