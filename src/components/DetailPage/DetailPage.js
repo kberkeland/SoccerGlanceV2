@@ -5,19 +5,14 @@ import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
 
 class DetailPage extends Component {
 
-    // componentDidMount() {
-    //     const action = {type: 'FETCH_STATS'};
-    //     this.props.dispatch(action);
-    // }
-
+    // function will delete a team from the users list of teams
     deleteMyteamOnPress = (teamIdIn, teamNameIn) => {
         const action = {type: 'DELETE_SM_MY_TEAM', payload: teamIdIn};
         this.props.dispatch(action);
         this.props.dispatch({type: 'FETCH_SM_MY_TEAMS', payload: this.props.user.id});
-        // this.props.navigation.navigate('Home');
         Alert.alert(`${teamNameIn}`, 'Was deleted from your teams');
         this.props.navigation.pop();
-        // this.props.navigation.navigate('Home');
+
     } // end deleteMyteam
 
     static navigationOptions = ({ navigation }) => {
@@ -32,20 +27,10 @@ class DetailPage extends Component {
         const teamId = navigation.getParam('teamId', 'Some team');
         const currentTeam = this.props.smMyTeams.find( team => ( team.id === teamId ));
         const teamStats = currentTeam.stats.data.find( stats => ( stats.season_id === currentTeam.current_season_id));
-        // console.log(currentTeam.stats.data);
-        // console.log(teamStats);
 
         return (
             <View style={styles.container}>
-                {/* <Text>{currentTeam.name}</Text> */}
-                {/* <FlatList
-                    data={teamStats}
-                    renderItem={({ item, i }) => (
-                        <Text>{item}</Text>
-                    )}
-                /> */}
                 <Text style={styles.heading}>{currentTeam.name}</Text>
-                {/* <Text style={styles.heading}>{currentTrecord}</Text> */}
                     <Text style={styles.pageitems}>Wins: {teamStats.win.total}</Text>
                     <Text style={styles.pageitems}>Draws: {teamStats.draw.total}</Text>
                     <Text style={styles.pageitems}>Losses: {teamStats.lost.total}</Text>
@@ -55,9 +40,6 @@ class DetailPage extends Component {
                     <Text style={styles.pageitems}>Goals scored: {teamStats.goals_for.total}</Text>
                     <Text style={styles.pageitems}>Goals conceded: {teamStats.goals_against.total}</Text>
                     <Button title='Remove this team?' onPress={() => this.deleteMyteamOnPress(currentTeam.id, currentTeam.name)} />
-                {/* {this.props.reduxStore.stats.teamStats.map((stats, i) => (
-                    <Text key={i}>{stats}</Text>
-                ))} */}
             </View>
         )
     }

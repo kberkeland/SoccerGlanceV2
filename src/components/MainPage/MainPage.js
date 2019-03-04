@@ -32,14 +32,9 @@ class MainPage extends Component {
         return (
             <View style={styles.container} contentContainerStyle={{flex: 1}}>
                 <ScrollView showsVerticalScrollIndicator={true}>
-                {this.props.reduxStore.smMyTeams.map((teams, i) => (
-                    <MainPageItem key={i} teams={teams} navigation={this.props.navigation} />
-                ))}
-                {/* <TouchableOpacity
-                    style={styles.card}
-                    onPress={this.addATeam}>
-                    <Text>Add another team</Text>
-                </TouchableOpacity> */}
+                    {this.props.reduxStore.smMyTeams.map((teams, i) => (
+                        <MainPageItem key={i} teams={teams} navigation={this.props.navigation} />
+                    ))}
                 </ScrollView>
             </View>
         )

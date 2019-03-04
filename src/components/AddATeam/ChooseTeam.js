@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, FlatList, ActivityIndicator, Switch, ScrollView, Alert } from "react-native";
-import { List, ListItem, SearchBar, Button, Icon } from "react-native-elements";
+import { StyleSheet, FlatList, ScrollView, Alert } from "react-native";
+import { ListItem, Button } from "react-native-elements";
 import { connect } from 'react-redux';
 import NativeLogoutButton from './../LogOutButton/NativeLogoutButton.js';
 
 class ChooseTeam extends Component {
 
+    // This function will add a team to the users list of teams
     addMyTeam = (teamId, teamName) => {
         let dataToServer = { name: teamName,
                              team_id: teamId,
